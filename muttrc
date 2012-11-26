@@ -1,0 +1,129 @@
+# PATHS
+#define maildir folder
+set folder="~/mail"
+set alias_file=~/.mutt_aliases
+source ~/.mutt_aliases
+set header_cache = ~/.mutt/cache/headers
+# set message_cachedir = ~/.mutt/cache/bodies
+# set certificate_file = ~/.mutt/certificates
+set mailcap_path = ~/.mutt/mailcap
+set tmpdir = ~/.mutt/tmp
+# set signature = ~/.mutt/sig
+#define inbox (+ expands to $folder above)
+set spoolfile="+INBOX"
+#sent items
+set record="+Sent\ Items"
+#drafts
+set postponed="+drafts"
+
+#tell mutt to use maildir instead of mbox
+set mbox_type=Maildir
+
+# APPEARANCE
+set date_format = "%a %d %b" # formats as strftime
+set index_format="[%Z] %-20.20F (%M) %s %* %D" # %* justifies right w priority
+# COLORSCHEME
+source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+
+# INDEX KEY BINDINGS
+bind index gg first-entry
+bind index G  last-entry
+bind index R group-reply
+bind index <tab> sync-mailbox
+bind index <space> collapse-thread
+# bind index T collapse-all
+# sane copy/move dialog!
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+set auto_tag # apply commands to all tagged messages
+
+# view html emails
+# auto_view text/html
+
+# SEARCHING
+# notmuch-mail-py hook
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py -G ~/mail/tmp/search<enter><change-folder-readonly>+tmp/search<enter>" "search mail (using notmuch)"
+macro index A "<limit>all<enter>" "show all messages (undo limit)"
+bind index N search-opposite
+bind pager N search-opposite
+# offlineimap hook
+macro generic I "<shell-escape> offlineimap<enter>" "OfflineIMAP"
+
+# SIDEBAR
+# navigation
+bind index,pager <down> sidebar-next
+bind index,pager <up>   sidebar-prev
+bind index,pager <right> sidebar-open
+# appearance
+set sidebar_width = 24
+set sidebar_visible = yes
+set sidebar_delim = ' |'
+set status_chars  = " *%A"
+set status_format = "---[ Folder: %f ]---[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]---%>-%?p?( %p postponed )?---"
+# mailboxes for sidebar
+mailboxes +INBOX\
+          +store\
+          +sent\
+          +drafts\
+          +tmp/search\
+
+# PAGER
+set pager_index_lines=10 # index lines
+set pager_context = 3 # context lines
+set pager_stop # don't go to next message automatically
+set menu_scroll
+set tilde
+unset markers # no plus signs
+alternative_order text/plain text/enriched text/html
+# PAGER BINDINGS
+bind pager k previous-undeleted
+bind pager j next-undeleted
+bind pager gg top
+bind pager G bottom
+bind pager R group-reply
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# attachment viewing
+# bind attach <return> view-mailcap
+
+# THREADING
+# threading like gmail
+set sort=threads
+set sort_aux=reverse-last-date-received
+set uncollapse_jump
+unset collapse_unread
+# auto collapse threads
+folder-hook . "exec collapse-all"
+
+#stop asking if I want to move read messages to mbox
+set move=no
+
+# COMPOSING
+set fast_reply
+set edit_headers
+set askcc
+set reverse_name
+set reverse_alias
+set editor="vim"
+# set metoo
+set askbcc
+
+#header weeding. ignores everything, then allows only minimal 
+#information back in.
+ignore *
+unignore From: Date: Subject: To: CC: Reply-To:
+unhdr_order *
+hdr_order from: date: to: cc: subject: reply-to:
+
+#headers on mail that I send.
+my_hdr From: "Aaron O'Leary" <eeaol@leeds.ac.uk>
+my_hdr Reply-To: eeaol@leeds.ac.uk
+
+#colours!
+# color header green default "^(From|Reply-To|Subject)
+# color header yellow default "^Date 
+# color header cyan default "^(CC|To)
+
+# color index brightwhite default "~U"
+# color index blue default "~D"
