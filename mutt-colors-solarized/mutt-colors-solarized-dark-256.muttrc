@@ -44,6 +44,13 @@ mono  error         bold
 
 # index ----------------------------------------------------------------
 
+# AOL - colouring x-labels
+# patch for editing x-label http://soberbuildengineer.com/blog/2011/12/managing-mail-madness-with-mutt/
+# script for it http://blitiri.com.ar/p/other/mutt-labels/, which can probably be extended
+# so that we don't have to tell it the name of the label to apply
+# this would give colorfg/bg to messages with expr in the x-label field
+# color index colorfg colorbg "~y expr"
+
 #color index         color160        color234        "~D(!~p|~p)"               # deleted
 #color index         color235        color234        ~F                         # flagged
 #color index         color166        color234        ~=                         # duplicate messages
@@ -82,7 +89,7 @@ color index         color37         color235        "~v~(~p)"                   
 color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
 #color index         color136        color234        "~(~N)"                    # messages in threads with some unread
 #color index         color64         color234        "~S"                       # superseded messages
-#color index         color160        color234        "~T"                       # tagged messages
+color index         color234        color33        "~T"                       # tagged messages
 #color index         color166        color160        "~="                       # duplicated messages
 
 # message headers ------------------------------------------------------
