@@ -1,6 +1,6 @@
 # PATHS
 #define maildir folder
-set folder="~/mail"
+set folder="~/.mail"
 set alias_file=~/.mutt_aliases
 source ~/.mutt_aliases
 set header_cache = ~/.mutt/cache/headers
@@ -10,11 +10,11 @@ set mailcap_path = ~/.mutt/mailcap
 set tmpdir = ~/.mutt/tmp
 # set signature = ~/.mutt/sig
 #define inbox (+ expands to $folder above)
-set spoolfile="+INBOX"
+set spoolfile="+aaron-gmail/INBOX"
 #sent items
-set record="+Sent\ Items"
+# set record="+Sent\ Items"
 #drafts
-set postponed="+drafts"
+set postponed="+aaron-gmail/drafts"
 
 #tell mutt to use maildir instead of mbox
 set mbox_type=Maildir
@@ -25,7 +25,8 @@ set sleep_time=0
 set date_format = "%a %d %b" # formats as strftime
 set index_format="[%Z] %-20.20F (%M) %s %* %D" # %* justifies right w priority
 # COLORSCHEME
-source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
+# source $HOME/.mutt/badwolf.muttrc
 
 # INDEX KEY BINDINGS
 bind index gg first-entry
@@ -67,16 +68,14 @@ bind index,pager <up>   sidebar-prev
 bind index,pager <right> sidebar-open
 # appearance
 set sidebar_width = 24
-set sidebar_visible = yes
+# set sidebar_visible = yes
 set sidebar_delim = ' |'
 set status_chars  = " *%A"
 set status_format = "---[ Folder: %f ]---[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]---%>-%?p?( %p postponed )?---"
 # mailboxes for sidebar
-mailboxes +INBOX\
-          +store\
-          +Sent\ Items\
-          +drafts\
-          +tmp/search\
+mailboxes +aaron-gmail/INBOX\
+          +aaron-gmail/drafts\
+          # +tmp/search\
 
 # PAGER
 set pager_index_lines=10 # index lines
@@ -122,6 +121,12 @@ set editor="vim"
 # set metoo
 set askbcc
 
+# SENDING
+set from = "aaron.oleary@gmail.com"
+set sendmail = "/usr/bin/msmtp -a aaron-gmail"
+set sendmail_wait = 0
+unset record
+
 #header weeding. ignores everything, then allows only minimal 
 #information back in.
 ignore *
@@ -130,9 +135,9 @@ unhdr_order *
 hdr_order from: date: to: cc: subject: reply-to:
 
 #headers on mail that I send.
-my_hdr From: "Aaron O'Leary" <eeaol@leeds.ac.uk>
-my_hdr Reply-To: eeaol@leeds.ac.uk
-my_hdr Bcc: eeaol@leeds.ac.uk
+# my_hdr From: "Aaron O'Leary" <eeaol@leeds.ac.uk>
+# my_hdr Reply-To: eeaol@leeds.ac.uk
+# my_hdr Bcc: eeaol@leeds.ac.uk
 
 #colours!
 # color header green default "^(From|Reply-To|Subject)
