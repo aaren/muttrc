@@ -36,9 +36,10 @@ cat > "$MAILFILE" || exit 1
 
 # If we are online, run the queue immediately.
 # Replace the test with something suitable for your site.
-#ping -c 1 -w 2 SOME-IP-ADDRESS > /dev/null 
-#if [ $? -eq 0 ]; then
-#	msmtp-runqueue.sh > /dev/null &
-#fi
+PING_ADDRESS=smtp.gmail.com
+ping -c 1 -w 2 ${PING_ADDRESS} > /dev/null 
+if [ $? -eq 0 ]; then
+    msmtp-runqueue.sh > /dev/null &
+fi
 
 exit 0
