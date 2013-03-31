@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-QUEUEDIR="$HOME/.msmtpqueue"
+QUEUEDIR="$HOME/.mail/msmtpqueue"
 LOCKFILE="$QUEUEDIR/.lock"
 MAXWAIT=120
 
