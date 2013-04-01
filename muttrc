@@ -57,9 +57,9 @@ macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py
 macro index A "<limit>all<enter>" "show all messages (undo limit)"
 bind index N search-opposite
 bind pager N search-opposite
-# offlineimap hook
-macro index I "<shell-escape> offlineimap<enter>" "OfflineIMAP"
-macro pager I "<shell-escape> offlineimap<enter>" "OfflineIMAP"
+# offlineimap and msmtpqueue hook
+macro index I "<shell-escape> offlineimap<enter> /home/aaron/.mutt/msmtpqueue/msmtp-runqueue.sh<enter>" "OfflineIMAP"
+macro pager I "<shell-escape> offlineimap<enter> /home/aaron/.mutt/msmtpqueue/msmtp-runqueue.sh<enter>" "OfflineIMAP"
 
 # SIDEBAR
 # navigation
@@ -123,7 +123,8 @@ set askbcc
 
 # SENDING
 set from = "aaron.oleary@gmail.com"
-set sendmail = "/usr/bin/msmtp -a aaron-gmail"
+set sendmail = "/usr/bin/msmtp -a AaronGmail"
+set sendmail = "/home/aaron/.mutt/msmtpqueue/msmtp-enqueue.sh -a AaronGmail"
 set sendmail_wait = 0
 unset record
 

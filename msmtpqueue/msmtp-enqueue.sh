@@ -39,7 +39,7 @@ cat > "$MAILFILE" || exit 1
 PING_ADDRESS=smtp.gmail.com
 ping -c 1 -w 2 ${PING_ADDRESS} > /dev/null 
 if [ $? -eq 0 ]; then
-    msmtp-runqueue.sh > /dev/null &
+    msmtp-runqueue > /dev/null &
 fi
 
 exit 0
