@@ -21,7 +21,6 @@ set date_format = "%a %d %b" # formats as strftime
 set index_format="[%Z] %-20.20F (%M) %s %* %D" # %* justifies right w priority
 # COLORSCHEME
 source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
-# source $HOME/.mutt/badwolf.muttrc
 
 # INDEX KEY BINDINGS
 bind index gg first-entry
@@ -72,10 +71,6 @@ macro index,pager b '<enter-command>toggle sidebar_visible<enter>'
 set sidebar_delim = ' |'
 set status_chars  = " *%A"
 set status_format = "---[ Folder: %f ]---[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]---%>-%?p?( %p postponed )?---"
-# mailboxes for sidebar
-mailboxes +AaronGmail/INBOX\
-          +AaronGmail/drafts\
-          # +tmp/search\
 
 # PAGER
 set pager_index_lines=10 # index lines

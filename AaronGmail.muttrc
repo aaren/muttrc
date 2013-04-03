@@ -1,0 +1,24 @@
+# Gmail specific muttrc
+# nb. doesn't sync the archive folder. Messages deleted from inbox
+# will go there.
+
+# FOLDERS
+set folder="~/.mail/AaronGmail"
+set spoolfile="+INBOX"
+#sent items
+# set record="+Sent\ Items"
+unset record  # don't duplicate
+#drafts
+set postponed="+drafts"
+
+# mailboxes for sidebar
+mailboxes +INBOX\
+          +drafts\
+          +sent\
+          # +tmp/search\
+
+# SENDING
+set from = "aaron.oleary@gmail.com"
+# set sendmail = "msmtp --account=AaronGmail"
+set sendmail = "/home/aaron/.mutt/msmtpqueue/msmtp-enqueue.sh -a AaronGmail"
+set sendmail_wait = 0

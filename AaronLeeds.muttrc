@@ -1,0 +1,22 @@
+# Leeds specific muttrc
+
+# FOLDERS
+set folder="~/.mail/AaronLeeds"
+set spoolfile="+INBOX"
+#sent items
+# set record="+sent"
+unset record  # don't duplicate my sent emails
+#drafts
+set postponed="+drafts"
+
+# mailboxes for sidebar
+mailboxes +INBOX\
+          +drafts\
+          +sent\
+          # +tmp/search\
+
+# SENDING
+set from = "eeaol@leeds.ac.uk"
+# set sendmail = "msmtp --account=AaronLeeds"
+set sendmail = "/home/aaron/.mutt/msmtpqueue/msmtp-enqueue.sh -a AaronLeeds"
+set sendmail_wait = 0

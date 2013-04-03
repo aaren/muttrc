@@ -1,0 +1,18 @@
+# Loosely based on
+# http://evanhanson.com/misc/multiple-accounts-in-mutt/
+
+# Where is the mail kept?
+set my_AaronGmail = "~/.mail/AaronGmail"
+set my_AaronLeeds = "~/.mail/AaronLeeds"
+
+# key bindings to switch accounts
+macro index,pager gag "<change-folder>$my_AaronGmail/INBOX<enter>" "go to Gmail"
+macro index,pager gal "<change-folder>$my_AaronLeeds/INBOX<enter>" "go to Leeds"
+
+# Load different account settings when in different account folder
+folder-hook $my_AaronGmail source ~/.mutt/AaronGmail.muttrc
+folder-hook $my_AaronLeeds source ~/.mutt/AaronLeeds.muttrc
+
+# load default account
+source ~/.mutt/AaronGmail.muttrc
+
