@@ -1,6 +1,9 @@
 # PATHS
+#tell mutt to use maildir instead of mbox
+set mbox_type=Maildir
+# account specific settings
+source ~/.mutt/sources.muttrc
 #define maildir folder
-set folder="~/.mail"
 set alias_file=~/.mutt_aliases
 source ~/.mutt_aliases
 set header_cache = ~/.mutt/cache/headers
@@ -9,15 +12,7 @@ set header_cache = ~/.mutt/cache/headers
 set mailcap_path = ~/.mutt/mailcap
 set tmpdir = ~/.mutt/tmp
 # set signature = ~/.mutt/sig
-#define inbox (+ expands to $folder above)
-set spoolfile="+AaronGmail/INBOX"
-#sent items
-# set record="+Sent\ Items"
-#drafts
-set postponed="+AaronGmail/drafts"
 
-#tell mutt to use maildir instead of mbox
-set mbox_type=Maildir
 # no pause between folder switching
 set sleep_time=0
 
@@ -68,7 +63,12 @@ bind index,pager <up>   sidebar-prev
 bind index,pager <right> sidebar-open
 # appearance
 set sidebar_width = 24
-# set sidebar_visible = yes
+set sidebar_visible = no
+# toggle visibility
+macro index,pager b '<enter-command>toggle sidebar_visible<enter>'
+# Mario Holbe suggests:
+# macro index b ‘<enter-command>toggle sidebar_visible<enter><refresh>’
+# macro pager b ‘<enter-command>toggle sidebar_visible<enter><redraw-screen>’
 set sidebar_delim = ' |'
 set status_chars  = " *%A"
 set status_format = "---[ Folder: %f ]---[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]---%>-%?p?( %p postponed )?---"
@@ -121,12 +121,6 @@ set editor="vim"
 # set metoo
 set askbcc
 
-# SENDING
-set from = "aaron.oleary@gmail.com"
-set sendmail = "/usr/bin/msmtp -a AaronGmail"
-set sendmail = "/home/aaron/.mutt/msmtpqueue/msmtp-enqueue.sh -a AaronGmail"
-set sendmail_wait = 0
-unset record
 
 #header weeding. ignores everything, then allows only minimal 
 #information back in.
@@ -134,16 +128,3 @@ ignore *
 unignore From: Date: Subject: To: CC: Reply-To:
 unhdr_order *
 hdr_order from: date: to: cc: subject: reply-to:
-
-#headers on mail that I send.
-# my_hdr From: "Aaron O'Leary" <eeaol@leeds.ac.uk>
-# my_hdr Reply-To: eeaol@leeds.ac.uk
-# my_hdr Bcc: eeaol@leeds.ac.uk
-
-#colours!
-# color header green default "^(From|Reply-To|Subject)
-# color header yellow default "^Date 
-# color header cyan default "^(CC|To)
-
-# color index brightwhite default "~U"
-# color index blue default "~D"
