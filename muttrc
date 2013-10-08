@@ -123,3 +123,6 @@ ignore *
 unignore From: Date: Subject: To: CC: Reply-To:
 unhdr_order *
 hdr_order from: date: to: cc: subject: reply-to:
+
+# use gpg
+source ~/.mutt/gpg.rc
