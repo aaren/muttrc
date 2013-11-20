@@ -46,9 +46,29 @@ auto_view text/html
 alternative_order text/plain text/enriched text/html
 
 # SEARCHING
-# notmuch-mail-py hook
-macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py -G ~/mail/tmp/search<enter><change-folder-readonly>+tmp/search<enter>" "search mail (using notmuch)"
+# performs a notmuch query, showing only the results
+macro index S "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+# 'A' shows all messages again (supersedes default <alias> binding)
 macro index A "<limit>all<enter>" "show all messages (undo limit)"
+macro index <F8> \
+           "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+           <shell-escape>notmuch-mutt -r --prompt search<enter>\
+           <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+           <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+                 "notmuch: search mail"
+macro index <F9> \
+           "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+           <pipe-message>notmuch-mutt -r thread<enter>\
+           <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+           <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+                 "notmuch: reconstruct thread"
+
+# contact completion
+# http://blog.tshirtman.fr/2013/3/17/mutt-offlineimap-notmuch-nottoomuch
+# set query_command="$HOME/.mutt/ntmw.sh %s"
+set query_command="/home/aaron/.mutt/nottoomuch-addresses.sh %s"
+set query_format="%t %-25.24n %a %e"
+
 bind index N search-opposite
 bind pager N search-opposite
 # offlineimap and msmtpqueue hook
