@@ -5,7 +5,11 @@ set folder="~/.mail/AaronLeeds"
 set spoolfile="+INBOX"
 #sent items
 # set record="+sent"
-unset record  # don't duplicate my sent emails
+# keep sent messages in the same folder that i sent them from (what " means)
+# this gives gmail like threading
+# unset record
+folder-hook . 'set record=^'
+# unset record  # don't duplicate my sent emails (for gmail)
 #drafts
 set postponed="+drafts"
 
