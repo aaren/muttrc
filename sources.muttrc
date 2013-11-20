@@ -15,4 +15,3 @@ folder-hook $my_AaronLeeds source ~/.mutt/AaronLeeds.muttrc
 
 # load default account
 source ~/.mutt/AaronGmail.muttrc
-
