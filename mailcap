@@ -8,3 +8,6 @@ application/pdf; { set -m \; /bin/mv -T %s %s.mv \; /usr/bin/nohup evince %s.mv 
 # text/html; lynx -dump -force_html -assume_charset %{charset} -localhost %s; copiousoutput
 # render html as markdown
 text/html; pandoc -f html -t markdown; copiousoutput
+
+# office documents
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; { set -m \; /bin/mv -T %s %s.mv \; /usr/bin/nohup libreoffice %s.mv 2>/dev/null && /bin/rm %s.mv & }
