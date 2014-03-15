@@ -117,7 +117,9 @@ bind attach <return> view-mailcap
 # THREADING
 # threading like gmail
 set sort=threads
+set strict_threads="yes"
 set sort_aux=reverse-last-date-received
+set sort_browser="reverse-date"
 set uncollapse_jump
 unset collapse_unread
 # auto collapse threads
