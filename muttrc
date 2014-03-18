@@ -41,6 +41,8 @@ set wrap = 100
 auto_view text/html
 # but look at plain text first
 alternative_order text/plain text/enriched text/html
+# automatically deal with octet stream (conjunction with mutt.octet.filter)
+auto_view application/octet-stream
 
 # SEARCHING
 # performs a notmuch query, showing only the results
